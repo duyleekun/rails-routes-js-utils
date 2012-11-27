@@ -3,4 +3,4 @@ window.Routes = {};
 function addRouteToEnv(obj) {
     window.Routes[obj.name+'_path'] = obj.replace
 }
-<%= generate %>
+<%= Rails::Routes::Js::Utils.generate %>
