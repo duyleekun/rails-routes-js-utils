@@ -29,9 +29,9 @@ module Rails
                 compiled_match << param_replace
               end
             end
-            compiled_match << "\/?$"
+            compiled_match << '\/?$'
             compiled_regex = Regexp.new(compiled_match.join());
-            compiled_replace << ";}"
+            compiled_replace << ";}";
 
             if compiled_regex.match(this_spec) && route.name
               "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex.inspect} , reqs: #{reqs}, replace: #{compiled_replace.join()}});"
