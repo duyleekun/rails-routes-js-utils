@@ -17,7 +17,7 @@ module Rails
             static_part = this_spec.split(param_split)
             dynamic_part = this_spec.scan(param_split)
             dynamic_part.slice!(-1,1)
-            compiled_match = []
+            compiled_match = ['^']
             compiled_replace = ["function() { return ''"]
             for i in 0..[static_part.length,dynamic_part.length].max
               if (static_part[i] && static_part[i].length)
@@ -29,6 +29,7 @@ module Rails
                 compiled_match << param_replace
               end
             end
+            compiled_match << "\/?$"
             compiled_regex = Regexp.new(compiled_match.join());
             compiled_replace << ";}"
 
