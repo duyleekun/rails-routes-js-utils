@@ -33,7 +33,7 @@ module Rails
             compiled_regex = Regexp.new(compiled_match.join());
             compiled_replace << ";}";
 
-            if compiled_regex.match(this_spec) && route.name
+            if route.name
               "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex.inspect} , reqs: #{reqs}, replace: #{compiled_replace.join()}});"
             end
           end.join("\n");
