@@ -8,7 +8,7 @@ module Rails
         def self.generate
           all_routes = ENV['CONTROLLER'] ? Rails.Application.routes.select { |route| route.defaults[:controller] == ENV['CONTROLLER'] } : IMuaSam::Application.routes
           param_split = /\(?\.?:[^\/\(\)]*\)?/
-          param_replace = '[^\/\(\)]*'
+          param_replace = '([^\/\(\)]*)'
 
           all_routes.routes.collect do |route|
             reqs = route.requirements.empty? ? "{}" : route.requirements.to_json
