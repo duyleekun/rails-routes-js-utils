@@ -25,7 +25,7 @@ Add this to application.js
 
 ## Usage
 
-```
+```javascript
 Routes.blog_post_path(id)
 Routes.blog_posts_path()
 
