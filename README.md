@@ -1,6 +1,6 @@
 # Rails::Routes::Js::Utils
 
-TODO: Write a gem description
+Make rails route available via window.Routes.*_path() and Array window.AllRoutes
 
 ## Installation
 
@@ -16,9 +16,28 @@ Or install it yourself as:
 
     $ gem install rails-routes-js-utils
 
+
+Add this to application.js
+
+```
+//= require rails-routes-js-utils
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+```
+Routes.blog_post_path(id)
+Routes.blog_posts_path()
+
+for (var i=0; i<AllRoutes.length; i++){
+    if (AllRoutes[i].path.test(pathname)) {
+        console.log(AllRoutes[i]);
+        var controller = AllRoutes[i].reqs.controller;
+        var action = AllRoutes[i].reqs.action;
+}
+```
+
+
 
 ## Contributing
 
