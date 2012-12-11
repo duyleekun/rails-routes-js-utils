@@ -2,7 +2,7 @@
 window.Routes = {};
 window.AllRoutes = [];
 function addRouteToEnv(obj) {
-    window.Routes[obj.name+'_path'] = obj.replace;
+    window.Routes[obj.name+'_path'] = obj.path;
     window.AllRoutes.push({path: obj.path,reqs: obj.reqs});
 }
 <%= Rails::Routes::Js::Utils.generate %>
