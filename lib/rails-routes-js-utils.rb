@@ -11,7 +11,7 @@ module Rails
             compiled_regex = route.path.to_regexp.to_javascript
             reqs = route.defaults.merge(parts: route.parts)
             if route.name
-              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex} , reqs: #{reqs}});"
+              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex} , reqs: #{reqs.to_json}});"
             end
           end.join("\n");
         end
