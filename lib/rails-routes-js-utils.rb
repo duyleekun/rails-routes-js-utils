@@ -37,6 +37,9 @@ module Rails
 
             #route.defaults contains action and controller name
             reqs = route.defaults.merge(parts: route.parts)
+
+
+            subdomain_regex = {}
             if route.constraints[:subdomain]
               subdomain_regex = route.constraints[:subdomain].to_javascript
             end
