@@ -26,14 +26,20 @@ Add this to application.js
 ## Usage
 
 ```javascript
-Routes.blog_post_path(id)
+Routes.blog_post_path(123)
+Routes.blog_post_path({id: 123})
 Routes.blog_posts_path()
 
 for (var i=0; i<AllRoutes.length; i++){
-    if (AllRoutes[i].path.test(pathname)) {
-        console.log(AllRoutes[i]);
-        var controller = AllRoutes[i].reqs.controller;
-        var action = AllRoutes[i].reqs.action;
+    var route = AllRoutes[i];
+    var subdomain = document.location.hostname.split('.')[0];
+    var pathname = document.location.pathname;
+    if (route.path.test(pathname) && route.subdomain.test(subdomain)) {
+        // Matched route
+        console.log(route);
+        var controller = route.reqs.controller;
+        var action = route.reqs.action;
+        var parts = route.reqs.parts; 
 }
 ```
 
