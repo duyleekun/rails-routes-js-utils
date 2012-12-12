@@ -5,11 +5,12 @@ function addRouteToEnv(obj) {
     window.Routes[obj.name+'_path'] = function(idOrObject){
         if (typeof idOrObject == 'object')
             return obj.replace(idOrObject);
-        return obj.replace({id: idOrObject});
+        var param= {};
+        for (var i=0;i<obj.reqs.parts.length;i++) {
+            param[obj.reqs.parts[i]] = arguments[i];
+        }
+        return obj.replace(param);
     };
     window.AllRoutes.push({path: obj.path,reqs: obj.reqs});
 }
-
-addRouteToEnv({name: 'brand_root', path: /^\/$/ , reqs: {"controller":"brand/stores","action":"index","parts":[]}, replace: function(opts) { return '/'; }})
-
 <%= Rails::Routes::Js::Utils.generate %>

@@ -35,6 +35,9 @@ module Rails
           all_routes.routes.collect do |route|
             compiled_regex = route.path.to_regexp.to_javascript
             reqs = route.defaults.merge(parts: route.parts)
+            if route.constraints[:subdomain]
+              reqs = reqs.merge(subdomain: route.constraints[:subdomain].to_javascript)
+            end
 
             js = [];
             dig(route.path.spec,js)
