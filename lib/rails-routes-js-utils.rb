@@ -34,15 +34,17 @@ module Rails
           all_routes = ENV['CONTROLLER'] ? Rails.Application.routes.select { |route| route.defaults[:controller] == ENV['CONTROLLER'] } : IMuaSam::Application.routes
           all_routes.routes.collect do |route|
             compiled_regex = route.path.to_regexp.to_javascript
+
+            #route.defaults contains action and controller name
             reqs = route.defaults.merge(parts: route.parts)
             if route.constraints[:subdomain]
-              reqs = reqs.merge(subdomain: route.constraints[:subdomain].to_javascript)
+              subdomain_regex = route.constraints[:subdomain].to_javascript
             end
 
             js = [];
             dig(route.path.spec,js)
             if route.name
-              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; } });"
+              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; } });"
             end
           end.join("\n");
         end
