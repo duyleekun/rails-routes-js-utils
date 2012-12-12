@@ -11,6 +11,6 @@ function addRouteToEnv(obj) {
         }
         return obj.replace(param);
     };
-    window.AllRoutes.push({path: obj.path,reqs: obj.reqs});
+    window.AllRoutes.push(obj);
 }
 <%= Rails::Routes::Js::Utils.generate %>
