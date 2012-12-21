@@ -31,7 +31,7 @@ module Rails
         end
 
         def self.generate
-          all_routes = ENV['CONTROLLER'] ? Rails.Application.routes.select { |route| route.defaults[:controller] == ENV['CONTROLLER'] } : IMuaSam::Application.routes
+          all_routes = ENV['CONTROLLER'] ? Rails.Application.routes.select { |route| route.defaults[:controller] == ENV['CONTROLLER'] } : Rails.application.routes
           all_routes.routes.collect do |route|
             compiled_regex = route.path.to_regexp.to_javascript
 
