@@ -32,6 +32,7 @@ module Rails
 
         def self.generate
           all_routes = ENV['CONTROLLER'] ? Rails.Application.routes.select { |route| route.defaults[:controller] == ENV['CONTROLLER'] } : Rails.application.routes
+          last_name = nil
           all_routes.routes.collect do |route|
             compiled_regex = route.path.to_regexp.to_javascript
 
@@ -50,8 +51,13 @@ module Rails
             if compiled_verb == '//'
               compiled_verb = '/.*/'
             end
-            if route.name
-              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; }, verb: #{compiled_verb} });"
+            name = route.name
+            if !name && last_name
+              name = last_name
+            end
+            if name
+              last_name = name
+              "addRouteToEnv({name: '#{name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; }, verb: #{compiled_verb} });"
             end
           end.join("\n");
         end
