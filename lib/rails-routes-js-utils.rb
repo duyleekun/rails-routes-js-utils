@@ -46,8 +46,12 @@ module Rails
 
             js = [];
             dig(route.path.spec,js)
+            compiled_verb = route.verb.to_javascript
+            if compiled_verb == '//'
+              compiled_verb = '/.*/'
+            end
             if route.name
-              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; } });"
+              "addRouteToEnv({name: '#{route.name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; }, verb: #{compiled_verb} });"
             end
           end.join("\n");
         end
