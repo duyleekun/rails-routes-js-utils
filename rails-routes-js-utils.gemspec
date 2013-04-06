@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = ""
 
   gem.add_development_dependency 'rails'
+  gem.add_dependency 'plist'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
