@@ -1,6 +1,7 @@
 # Rails::Routes::Js::Utils
 
-Make rails route available via window.Routes.*_path() and Array window.AllRoutes
+Make rails route available in Javascript via window.Routes.*_path() and Array window.AllRoutes
+This also generates plist file for iOS in /assets/rails-routes-js-utils.plist
 
 ## Installation
 
@@ -15,7 +16,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install rails-routes-js-utils
-
 
 Add this to application.js
 
