@@ -11,7 +11,7 @@ function addRouteToEnv(obj) {
             i--;
         }
         var pathName = obj.replace(param);
-        if (arguments[i]) {
+        if (arguments[i] && jQuery) {
             var query = $.param(arguments[i]);
             return [pathName,query].join('?');
         } else {
