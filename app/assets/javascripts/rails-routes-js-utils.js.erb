@@ -3,13 +3,20 @@ window.Routes = {};
 window.AllRoutes = [];
 function addRouteToEnv(obj) {
     window.Routes[obj.name+'_path'] = function(idOrObject){
-        if (typeof idOrObject == 'object')
-            return obj.replace(idOrObject);
         var param= {};
         for (var i=0;i<obj.reqs.parts.length;i++) {
             param[obj.reqs.parts[i]] = arguments[i];
         }
-        return obj.replace(param);
+        if (obj.reqs.parts[obj.reqs.parts.length-1] == 'format') {
+            i--;
+        }
+        var pathName = obj.replace(param);
+        if (arguments[i]) {
+            var query = $.param(arguments[i]);
+            return [pathName,query].join('?');
+        } else {
+            return pathName;
+        }
     };
     window.AllRoutes.push(obj);
 }
