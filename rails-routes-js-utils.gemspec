@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = "Make rails route available via window.Routes"
   gem.homepage      = ""
 
-  gem.add_development_dependency 'rails'
+  gem.add_development_dependency 'rails', '4.0.0'
   gem.add_dependency 'plist'
 
   gem.files         = `git ls-files`.split($/)

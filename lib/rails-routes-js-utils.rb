@@ -11,13 +11,13 @@ module Rails
         #DFS Traversal
         def self.dig(current,js = [])
 
-          if (!current.respond_to? :left) || (current.class == Journey::Nodes::Symbol) || (current.class == Journey::Nodes::Group)
+          if (!current.respond_to? :left) || (current.class == ActionDispatch::Journey::Nodes::Symbol) || (current.class == ActionDispatch::Journey::Nodes::Group)
             #puts("#{current.class} #{current}")
-            if (current.class == Journey::Nodes::Symbol)
+            if (current.class == ActionDispatch::Journey::Nodes::Symbol)
               #Required
               js << "opts.#{current.to_s[1..-1]}"
             else
-              if (current.class == Journey::Nodes::Group)
+              if (current.class == ActionDispatch::Journey::Nodes::Group)
                 #js << current.to_s
               else
                 #Literal
