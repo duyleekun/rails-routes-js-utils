@@ -46,9 +46,9 @@ module Rails
             reqs = route.defaults.merge(parts: route.parts)
 
 
-            subdomain_regex = {}
-            if route.constraints[:subdomain]
-              subdomain_regex = route.constraints[:subdomain].to_javascript
+            host_regex = {}
+            if route.constraints[:host]
+              host_regex = route.constraints[:host].to_javascript
             end
 
             js = dig(route.path.spec)
@@ -64,7 +64,7 @@ module Rails
 
             if name
               last_name = name
-              "addRouteToEnv({name: '#{name}', path: #{compiled_regex}, subdomain: #{subdomain_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; }, verb: #{compiled_verb} });"
+              "addRouteToEnv({name: '#{name}', path: #{compiled_regex}, host: #{host_regex} , reqs: #{reqs.to_json}, replace: function(opts) { return #{js.join('+')}; }, verb: #{compiled_verb} });"
             end
           end.join("\n")
 
@@ -80,7 +80,7 @@ module Rails
             reqs = route.defaults.merge(parts: route.parts)
 
             if name
-              parsedRoutes[name] = {path: route.path.to_regexp.to_javascript,subdomain: route.constraints[:subdomain] ? route.constraints[:subdomain].to_javascript: '',reqs: reqs, verb: route.verb.to_javascript,ast:route.ast.to_s}
+              parsedRoutes[name] = {path: route.path.to_regexp.to_javascript,host: route.constraints[:host] ? route.constraints[:host].to_javascript: '',reqs: reqs, verb: route.verb.to_javascript,ast:route.ast.to_s}
             end
           end
           parsedRoutes.to_plist
