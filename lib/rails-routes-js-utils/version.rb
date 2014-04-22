@@ -2,7 +2,7 @@ module Rails
   module Routes
     module Js
       module Utils
-        VERSION = "4.0.0"
+        VERSION = "4.0.1"
       end
     end
   end

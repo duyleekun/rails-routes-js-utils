@@ -1,23 +1,25 @@
 <% require "rails-routes-js-utils" %>
-window.Routes = {};
-window.AllRoutes = [];
-function addRouteToEnv(obj) {
-    window.Routes[obj.name+'_path'] = function(idOrObject){
-        var param= {};
-        for (var i=0;i<obj.reqs.parts.length;i++) {
-            param[obj.reqs.parts[i]] = arguments[i];
-        }
-        if (obj.reqs.parts[obj.reqs.parts.length-1] == 'format') {
-            i--;
-        }
-        var pathName = obj.replace(param);
-        if (arguments[i] && jQuery) {
-            var query = $.param(arguments[i]);
-            return [pathName,query].join('?');
-        } else {
-            return pathName;
-        }
-    };
-    window.AllRoutes.push(obj);
+if (typeof addRouteToEnv != 'function') {
+    window.Routes = {};
+    window.AllRoutes = [];
+    function addRouteToEnv(obj) {
+        window.Routes[obj.name+'_path'] = function(idOrObject){
+            var param= {};
+            for (var i=0;i<obj.reqs.parts.length;i++) {
+                param[obj.reqs.parts[i]] = arguments[i];
+            }
+            if (obj.reqs.parts[obj.reqs.parts.length-1] == 'format') {
+                i--;
+            }
+            var pathName = obj.replace(param);
+            if (arguments[i] && jQuery) {
+                var query = $.param(arguments[i]);
+                return [pathName,query].join('?');
+            } else {
+                return pathName;
+            }
+        };
+        window.AllRoutes.push(obj);
+    }
 }
 <%= Rails::Routes::Js::Utils.generate_js %>
