@@ -2,7 +2,7 @@
 if (typeof addRouteToEnv != 'function') {
     window.Routes = {};
     window.AllRoutes = [];
-    function addRouteToEnv(obj) {
+    window.addRouteToEnv = function addRouteToEnv(obj) {
         window.Routes[obj.name+'_path'] = function(idOrObject){
             var param= {};
             for (var i=0;i<obj.reqs.parts.length;i++) {
